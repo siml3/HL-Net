@@ -160,12 +160,12 @@ class Get_Atten_map_mc_clear(nn.Module):
         atten_tensor = atten_tensor + eye_tensor
         atten_map = F.softmax(atten_tensor, dim=1)
 
-        # Omega = torch.zeros_like(atten_map)
-        # Omega = Omega.masked_fill_(norm_mat<self.tau, self.tau_pm2) # tau^{-2} when l2norm(yi-yj) < tau else 0
-        # Omega = Omega.masked_fill_(torch.eye(Omega.shape[0], dtype=bool, device=Omega.device).unsqueeze(-1), 0.) # diag keep zero
-        # Omega = torch.where((norm_mat>=self.tau)&(norm_mat<self.T), norm_mat.clamp(min=1e-5).pow(-2.), Omega) # l2norm(yi-yj)^{-2} if  tau <= l2norm(yi-yj) < T
+        Omega = torch.zeros_like(atten_map)
+        Omega = Omega.masked_fill_(norm_mat<self.tau, self.tau_pm2) # tau^{-2} when l2norm(yi-yj) < tau else 0
+        Omega = Omega.masked_fill_(torch.eye(Omega.shape[0], dtype=bool, device=Omega.device).unsqueeze(-1), 0.) # diag keep zero
+        Omega = torch.where((norm_mat>=self.tau)&(norm_mat<self.T), norm_mat.clamp(min=1e-5).pow(-2.), Omega) # l2norm(yi-yj)^{-2} if  tau <= l2norm(yi-yj) < T
 
-        # atten_map = Omega * atten_map
+        atten_map = Omega * atten_map
         
         return atten_map
 
