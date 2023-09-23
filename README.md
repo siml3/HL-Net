@@ -113,6 +113,10 @@ Here we provide our pretrained model via BaiduNetDisk:
 
 Link：https://pan.baidu.com/s/1ujghYTjDB8MEgujQVVhCEQ Extraction code：1020
 
+or Google Drive：
+
+Link：https://drive.google.com/drive/folders/1BWaS6Fy7imfKgt6lcRQvSRMZroFkz8LD?usp=sharing
+
 ## Citation
 
 If HL-Net is helpful for your research, we'd really appreciate it if you could cite this paper:
